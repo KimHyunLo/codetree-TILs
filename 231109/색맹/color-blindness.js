@@ -1,25 +1,17 @@
-const input = require('fs').readFileSync('/dev/stdin').toString().split('\n');
+let input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
 const n = Number(input.shift());
-const RGB = input.map((e) => e.split(""));
-const RB = RGB.map((e) => e.map((e) => (e === "G" ? "R" : e)));
 
-const BFS = (colors) => {
-  const numbers = Array(n)
-    .fill(null)
-    .map(() => Array(n).fill(1));
-  const visited = Array(n)
-    .fill(null)
-    .map(() => Array(n).fill(false));
-  const queue = [{ x: 0, y: 0 }];
+const visited = Array(n)
+  .fill(null)
+  .map(() => Array(n).fill(false));
+let rgbCount = rbCount = 0;
+
+const BFS = (colors, x, y) => {
+  visited[x][y] = true;
+  const queue = [{ x, y }];
 
   while (queue.length > 0) {
     const { x, y } = queue.shift();
-
-    if (visited[x][y] === true) {
-      continue;
-    } else {
-      visited[x][y] = true;
-    }
 
     const direction = [
       { x2: x, y2: y - 1 },
@@ -29,21 +21,34 @@ const BFS = (colors) => {
     ];
 
     direction.forEach(({ x2, y2 }) => {
-      if (x2 >= 0 && x2 < n && y2 >= 0 && y2 < n && visited[x2][y2] === false) {
-        if (colors[x][y] !== colors[x2][y2]) {
-          numbers[x2][y2] = numbers[x][y] + 1;
-        } else {
-          numbers[x2][y2] = numbers[x][y];
-        }
-
+      if (x2 >= 0 && x2 < n && y2 >= 0 && y2 < n && visited[x2][y2] === false && colors[x][y] === colors[x2][y2]) {
+        visited[x2][y2] = true;
         queue.push({ x: x2, y: y2 });
       }
     });
   }
-
-  return Math.max(...numbers.map((e) => Math.max(...e)));
 };
 
-const rgbCount = BFS(RGB);
-const rbCount = BFS(RB);
+const RGB = input.map((e) => e.split(""));
+for (let i = 0; i < n; i++) {
+  for (let j = 0; j < n; j++) {
+    if (visited[i][j] === false) {
+      BFS(RGB, i, j);
+      rgbCount++;
+    }
+  }
+}
+
+visited.forEach((e) => e.fill(false));
+
+const RB = RGB.map((e) => e.map((e) => (e === "G" ? "R" : e)));
+for (let i = 0; i < n; i++) {
+  for (let j = 0; j < n; j++) {
+    if (visited[i][j] === false) {
+      BFS(RB, i, j);
+      rbCount++;
+    }
+  }
+}
+
 console.log(rgbCount, rbCount);
