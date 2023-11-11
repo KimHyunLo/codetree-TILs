@@ -25,7 +25,7 @@ const Calc = () => {
   return Math.abs(morningSum - eveningSum);
 };
 
-const BFS = (index, count) => {
+const findMin = (index, count) => {
   if (count === N / 2) {
     answer = Math.min(answer, Calc());
     return;
@@ -35,11 +35,11 @@ const BFS = (index, count) => {
     return;
   }
 
-  BFS(index + 1, count);
+  findMin(index + 1, count);
   evening[index] = true;
-  BFS(index + 1, count + 1);
+  findMin(index + 1, count + 1);
   evening[index] = false;
 };
 
-BFS(0, 0);
+findMin(0, 0);
 console.log(answer);
