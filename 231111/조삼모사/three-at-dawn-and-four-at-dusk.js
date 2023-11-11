@@ -5,7 +5,7 @@ const input = require('fs')
 
 const N = Number(input.shift());
 const PList = input.map((e) => e.split(" ").map((e) => +e));
-const evening = Array(N);
+const evening = Array(20);
 let answer = Infinity;
 
 const Calc = () => {
