@@ -5,7 +5,7 @@ const input = require('fs')
 
 const N = Number(input.shift());
 const PList = input.map((e) => e.split(" ").map((e) => +e));
-const evening = Array(20);
+const evening = Array(N).fill(false);
 let answer = Infinity;
 
 const Calc = () => {
@@ -13,10 +13,10 @@ const Calc = () => {
 
   for (let i = 0; i < N; i++) {
     for (let j = 0; j < N; j++) {
-      if (evening[i] === false && evening[j] === false) {
+      if (!evening[i] && !evening[j]) {
         morningSum += PList[i][j];
       }
-      if (evening[i] === true && evening[j] === true) {
+      if (evening[i] && evening[j]) {
         eveningSum += PList[i][j];
       }
     }
