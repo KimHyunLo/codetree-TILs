@@ -1,3 +1,38 @@
+// 숫자들로 이루어진 2차원 배열이 입력값으로 들어온다.
+// 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const input = require('fs')
 .readFileSync('/dev/stdin')
 .toString()
@@ -48,12 +83,10 @@ for (let i = 0; i < maxLoop; i++) {
   let morning = 0;
   let eveining = 0;
 
-  if (N / 2 !== 2) {
-    for (let j = 0; j < current.length; j++) {
-      for (let k = j + 1; k < current.length; k++) {
-        morning += calcWork(current[j], current[k]);
-        eveining += calcWork(opposit[j], opposit[k]);
-      }
+  for (let j = 0; j < current.length; j++) {
+    for (let k = j + 1; k < current.length; k++) {
+      morning += calcWork(current[j], current[k]);
+      eveining += calcWork(opposit[j], opposit[k]);
     }
   }
 
