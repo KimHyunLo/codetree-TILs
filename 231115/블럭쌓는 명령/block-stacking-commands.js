@@ -7,9 +7,12 @@ const container = Array(N).fill(0);
 for (let i = 0; i < K; i++) {
     const [A, B] = list[i];
 
-    for (let j = A - 1; j < B; j++) {
-        container[j]++;
-    }
+    container[A]++;
+    container[B + 1]--;
+}
+
+for (let i = 1; i < N + 1; i++) {
+    container[i] += container[i - 1];
 }
 
 container.sort((a, b) => a - b);
