@@ -8,12 +8,16 @@ for (let i = 0; i < K; i++) {
     const [A, B] = list[i];
 
     container[A]++;
-    container[B + 1]--;
+
+    if (B + 1 < N) {
+        container[B + 1]--;
+    }
 }
 
-for (let i = 1; i < N + 1; i++) {
+for (let i = 1; i < N; i++) {
     container[i] += container[i - 1];
 }
+
 
 container.sort((a, b) => a - b);
 const middle = container[Math.floor(N / 2)];
