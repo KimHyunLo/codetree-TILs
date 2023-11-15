@@ -13,5 +13,5 @@ for (let i = 0; i < K; i++) {
 }
 
 container.sort((a, b) => a - b);
-const middle = container[Math.floor(K / 2)];
+const middle = container[Math.floor(N / 2)];
 console.log(middle);
