@@ -18,7 +18,7 @@ for (let i= 1; i < max; i++) {
     if (current.length < answer) {
         break;
     } else {
-        answer = Math.max(answer, current.length);
+        answer = current.length;
     }
 }
 
