@@ -10,10 +10,11 @@ let answer = 0;
 
 for (let i= 1; i < max; i++) {
     const current = list
-    .map((e) => e - i <= 0 ? 0 : e - i)
+    .map((e) => e - i > 0 ? e - i : 0)
     .join("")
-    .split("0")
-    .filter((e) => e !== "");
+    .replaceAll(RegExp(/0+/g), " ")
+    .trim()
+    .split(" ");
 
     if (current.length < answer) {
         break;
