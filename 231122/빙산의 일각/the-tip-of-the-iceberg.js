@@ -15,7 +15,11 @@ for (let i= 1; i < max; i++) {
     .split("0")
     .filter((e) => e !== "");
 
-    answer = Math.max(answer, current.length);
+    if (current.length < answer) {
+        break;
+    } else {
+        answer = Math.max(answer, current.length);
+    }
 }
 
 console.log(answer);
