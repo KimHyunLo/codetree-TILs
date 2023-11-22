@@ -4,21 +4,15 @@ const input = require("fs")
 .split("\n");
 
 const N = +input.shift();
-
-if (N === 1000) {
-    console.log(254);
-    return;
-}
-
 const list = [...input].map((e) => +e);
 const max = Math.max(...list);
 let answer = 0;
 
 for (let i= 1; i < max; i++) {
-    const current = list
-    .map((e) => e - i > 0 ? e - i : 0)
+    let current = list
+    .map((e) => e - i > 0 ? e - i : "s")
     .join("")
-    .replaceAll(RegExp(/0+/g), " ")
+    .replaceAll(RegExp(/s+/g), " ")
     .trim()
     .split(" ");
 
