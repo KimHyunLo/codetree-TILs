@@ -2,7 +2,6 @@ const input = require("fs")
 .readFileSync("/dev/stdin")
 .toString()
 .split("\n")
-.map((e) => e.trim())
 .filter((e) => e !== '');;
 
 let answer = 0;
