@@ -5,19 +5,20 @@ const input = require("fs")
 
 let answer = 0;
 const N = +input.shift();
-
-const arr = Array(N + 2).fill(null);
+const arr = [...input].map(Number);
 const visited = Array(N + 2).fill(false);
 
-const userSet = new Set();
-for (let i = 0; i < N; i++) {
-    arr[i] = +input.shift();
-    userSet.add(arr[i]);
+const indexArr = Array(N).fill(null).map(() => []);
+const userSet = new Set([...arr].sort((a, b) => a - b));
+const userMap = new Map();
+
+let idx = 0;
+for (let value of userSet.values()) {
+    userMap.set(value, idx++);
 }
 
-const indexArr = Array(userSet.size).fill(null).map(() => []);
 for (let i = 0; i < N; i++){
-    indexArr[arr[i] - 1].push(i + 1);
+    indexArr[userMap.get(arr[i])].push(i);
 }
 
 let result = 0;
